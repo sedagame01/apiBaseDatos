@@ -1,4 +1,3 @@
-// RUTA CORREGIDA: Sube un nivel (..) y entra en 'models'
 const Servicio = require('../models/modelServicios'); 
 
 // Crear un nuevo servicio
@@ -15,7 +14,7 @@ exports.create = async (req, res) => {
         res.status(201).json(nuevoServicio); 
     } catch (error) {
         // Manejar errores de validación (400 Bad Request) o de servidor (500)
-        res.status(400).json({ 
+        return res.status(400).json({ 
             message: 'Error al crear el servicio. Revise los datos e intente nuevamente.', 
             error: error.message 
         });
