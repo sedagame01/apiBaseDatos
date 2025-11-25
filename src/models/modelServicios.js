@@ -30,3 +30,7 @@ const ServicioSchema = new mongoose.Schema({
 
 // exportamos el modelo para usarlo en el controlador
 module.exports = mongoose.model('Servicio', ServicioSchema);
+/* pasos a seguir
+
+
+*/

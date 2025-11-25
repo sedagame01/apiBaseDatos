@@ -7,9 +7,10 @@ const Servicio = require('../models/modelServicios');
    Devuelve el servicio creado con código 201 (Created) si es exitoso.
 */
 exports.create = async (req, res) => {
+  //es mejor crear una variable body = req.body para mayor claridad
     try {
         const nuevoServicio = new Servicio(req.body);
-        await nuevoServicio.save();
+        await nuevoServicio.save();//el save() es para guardar en la base de datos
         // 201 Created: Respuesta estándar para una creación exitosa
         res.status(201).json(nuevoServicio); 
     } catch (error) {
@@ -36,7 +37,7 @@ exports.getAll = async (req, res) => {
 exports.getOne = async (req, res) => {
   try { 
     const { id } = req.params;
-    // Buscar el servicio por ID
+    // Buscar el servicio por ID 
     const servicio = await Servicio.findById(id);
     if (!servicio) return res.status(404).json({ message: 'Servicio no encontrado' });
     res.json(servicio);
@@ -56,7 +57,8 @@ exports.update = async (req, res) => {
     const servicioActualizado = await Servicio.findByIdAndUpdate(id, nuevosDatos, { 
         new: true, 
         runValidators: true // Ejecuta validaciones del esquema al actualizar
-    }); 
+    });
+    console.log(servicioActualizado); 
     
     if (!servicioActualizado) return res.status(404).json({ message: 'Servicio no encontrado' });
     res.json(servicioActualizado);
@@ -77,3 +79,14 @@ exports.delete = async (req, res) => {
     res.status(500).json({ message: 'Error al eliminar el servicio', error: error.message });
   }
 }
+/* 
+pasos a seguir:
+1. Importar el modelo Servicio.
+2. Crear y exportar funciones asincrónicas para cada operación CRUD:
+   - create: Crear un nuevo servicio.
+    - getAll: Obtener todos los servicios.
+    - getOne: Obtener un servicio por ID.
+    - update: Actualizar un servicio por ID.
+    - delete: Eliminar un servicio por ID.
+3. Manejar errores y enviar respuestas HTTP adecuadas en cada función.
+ */
