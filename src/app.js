@@ -21,6 +21,9 @@ app.use('/api/servicios',((req,res,next)=>{
   next()
 } ),serviciosRoutes);
 
+//nueva api para la codificacion
+app.use('/api/outh',require('./routes/userRoutes'))
+
 // 4. Conexión a la base de datos y arranque del servidor
 const PORT = process.env.PORT || 3000;
 
